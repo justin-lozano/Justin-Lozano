@@ -13,13 +13,9 @@ hypothesis: "TBD"
 Based on the provided data (64 beds, a 36 week season in a perfect competition market, tomatoes earn $8,800/bed (max:20), carrots- $2,094/bed (max:20), and mesclun- $2,700/bed (max:30). This tells me I have 6 beds more than what I'm given if I planted the max for each vegetable. I must decide how to divide the 64 beds amongst each vegetable as I cannot max each of them out. If revenue was the only consideration, tomatoes would be ideal as they would earn the most per bed. However, based on the compounding labor for tomatoes, the labor is raised by 10% per crop compared to the other vegetables with a rate of 2.5% for carrots and 1.25% for mesclun. Given this information, I am not trying to figure out which crop would earn the most, rather, how many beds should be planted for each respective crop before any extra revenue concentrated in a crop would no longer be worth it. If a poor decision is made, I could see high revenue but it would be moot as the labor cost would eat into the profit.
 
 ## What I am assuming
-The assumptions you are taking as given, and which of them you would want
-to test if you had more time.
+I am assuming the farm will use all 64 beds and cannot go over any of the limits. Since we are taking the market price, I will assume that the revenue from each bed stays the same. Adding one bed makes all the beds of that crop more labor intensive. No starting labor info or labor cost has been provided so I cannot tell how costly the compounding rates would be. If I had more time, I would like to know the starting labor info and costs. This may help to determine if enough labor is available and how labor costs would affect the best crop mix.
 
 ## Hypothesis
-"I expect X because Y." Real quantities, and the mechanism you think decides
-it. You are not judged on being right. A hedged prediction that would survive
-any outcome is the only kind that is worthless.
+
 
 ## How I would know I was wrong
-The observation that would falsify the hypothesis above.
