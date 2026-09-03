@@ -1,43 +1,49 @@
 <!-- PR TARGET: https://github.com/justin-lozano/Justin-Lozano | Stage 1.1 (2.5 pts) -->
 # Stage 1.1 review — engagement brief
 
-**Not yet graded — the brief file is still the unfilled template. Held for revision; the deadline has not passed.**
-
 **Brief:** [`docs/briefs/perfect-competition-brief.md`](https://github.com/justin-lozano/Justin-Lozano/blob/main/docs/briefs/perfect-competition-brief.md)
 
-> Checked 2026-08-31. You committed docs/briefs/perfect-competition-brief.md on 30 August with the message "Create perfect competition engagement brief." The file is the template with nothing filled in — every section still holds its instruction text and the frontmatter hypothesis reads "TBD." I am holding this rather than scoring it, because scoring a template tells you nothing you do not already know.
+> Re-graded 2026-09-02 against your 1 September revision. Last time the file was the untouched template and there was nothing to score. There is real work in it now — the problem section is genuinely yours and it is largely right — but the hypothesis and the falsification section are still blank, and those two carry 45 of the 100 points.
 
-### What is in the file right now
+| Criterion | Earned | Notes |
+|---|---|---|
+| Problem restated in your own voice | 26 / 30 | This is real and it is yours. You catch the thing that makes the case a decision rather than a calculation: the caps sum to 70 against 64 beds, so "I have 6 beds more than what I'm given if I planted the max for each vegetable" and something has to give. And you frame the question correctly — "not which crop would earn the most, rather, how many beds should be planted for each respective crop before any extra revenue concentrated in a crop would no longer be worth it." That is the marginal question stated in your own words, which is what this criterion is for. Four points off because you do not say what it costs to decide it badly beyond profit being eaten into — the season is planted once and there is no mid-season correction, which is the real answer. |
+| Hypothesis names a specific mix | 0 / 25 | The section heading is there and nothing is under it. The frontmatter still reads hypothesis: "TBD". This is the criterion the stage exists for — three real bed counts, committed before you model anything — and it is the largest single block of points on the page. |
+| Economic mechanism | 8 / 25 | Partly present, inside the problem section rather than its own. You have the compounding rates right and you understand what they do: tomatoes at 10% per bed against 2.5% for carrots and 1.25% for mesclun, and the recognition that the answer is a crossover point rather than a ranking. Nothing is quantified, and one factual claim is wrong — see below. |
+| Falsifiability and process | 4 / 20 | The section heading is there and nothing is under it. Four points for having the file at the canonical path, committed before any modeling, with a clean history. |
+| **Final** | **38 / 100** | entered |
 
-Under "The problem" it says: "What is being decided, by whom, and what happens if it is decided badly." Under "Hypothesis" it says: "I expect X because Y." Under "How I would know I was wrong" it says: "The observation that would falsify the hypothesis above." Those are the prompts, not answers.
+> Raw total 38 of 100. There is no floor available here: the floor applies to a committed brief that restates the problem in your own words and names a specific mix, and the mix is the half that is missing. Two paragraphs would change that.
 
-I mention it in this much detail because it is the kind of thing that happens when a file is committed to establish the path and the writing is meant to follow. Nothing is lost — the file is at the correct path and the commit is clean.
+### The factual correction, and it is the thing blocking you
 
-### What the stage actually asks for
+You write: "No starting labor info or labor cost has been provided so I cannot tell how costly the compounding rates would be. If I had more time, I would like to know the starting labor info and costs."
 
-About a page, in your own words, written before you build anything.
+Both are in the case, in the same table you took the prices from. Labor hours per week per bed: tomatoes 2.50, carrots 0.833, mesclun 1.25. And the labor cost: the farmer is paid $50,000 for the season and spends 720 hours in the field, and up to four temporary workers are available at $25,000 each for 1,440 hours each — which works out to about $34.72 an hour for her and $17.36 for them.
 
-- The problem. What is being decided, by whom, and what it costs to decide it badly. What is fixed, what you get to choose, and what limits the choice. The test is whether you can state it without re-reading the case page — if you cannot, you do not have it yet.
+That is not a small correction, because it is the only thing standing between you and the rest of the brief. You already worked out that the answer is a crossover between rising labor cost and fixed revenue. With those four numbers you can actually locate it.
 
-- What you are assuming. The things you are taking as given, and which of them you would want to test with more time.
+### The arithmetic, so you can start from something concrete
 
-- Your hypothesis. Three real numbers — how many beds of tomatoes, carrots, and mesclun — and the mechanism you think decides it. You are not graded on being right. A hedged prediction that would survive any outcome is the only kind that is worthless.
+One bed of tomatoes takes 2.50 hours a week for 36 weeks, so 90 hours a season. The compounding works on the whole crop, not just the new bed: q beds of a crop need q × hours-per-bed-week × 36 × (1 + rate)^q hours in total. So ten tomato beds are not 900 hours — they are 900 × 1.1^10, about 2,334.
 
-- How you would know you were wrong. The specific result that would falsify what you just wrote. This is where most of this cohort loses points, so write it carefully: "if the model shows a different mix" is true of every hypothesis ever written and tests nothing. "If the model plants more than 14 tomato beds, I underestimated how much the 10 percent labor penalty compounds" is a real test.
+Carrots: one bed is 0.833 × 36, about 30 hours. Mesclun: 1.25 × 36, 45 hours. Both compound far more slowly.
 
-### The shape of the problem, so you can start from something
+Now the question you already framed correctly has a shape. Tomatoes earn $8,800 a bed against labor that roughly doubles every seven or eight beds. Carrots earn $2,094 against labor that barely moves. Where does the tomato bed stop being worth planting?
 
-The farm has 64 beds and a 36-week season, and it cannot influence prices — it takes what the market gives. Tomatoes earn $8,800 a bed, carrots $2,094, mesclun $2,700. The bed caps are 20, 20, and 30, which sum to 70 against 64 beds, so all three cannot be maxed and something has to give.
+### What to write, and it is two paragraphs
 
-The thing that makes it interesting is that labor compounds. Each additional bed of a crop raises the labor required for every bed of that crop, at 10 percent per bed for tomatoes, 2.5 percent for carrots, and 1.25 percent for mesclun. So the crop that earns the most per bed also gets expensive the fastest, and the question is where those two things cross.
+- Under Hypothesis: three numbers. How many beds of tomatoes, carrots, mesclun. Then one paragraph saying why those numbers and not others, using the rates. You are not graded on being right. A hedged prediction that would survive any outcome is the only kind that is worthless.
 
-Pick a mix, say why, and say what result would tell you it was wrong. That is the whole deliverable, and an hour of honest thinking beats a polished page.
+- Under How I would know I was wrong: two or three sentences, each naming a result the model could actually produce and the claim of yours it would break. "If the model shows a different mix" is true of every hypothesis ever written and tests nothing. "If the model plants more than 14 tomato beds, I underestimated how fast the 10% penalty compounds" is a real test.
 
-### Why it is worth doing properly rather than quickly
+- Then update the frontmatter hypothesis line so it matches the body rather than reading TBD.
 
-In Stage 3 you are asked to explain why your prediction and your model disagreed. That reflection is only worth writing if there was a real prediction to disagree with, and it has to have been committed before the model existed — the commit history is the proof.
+### Why this is worth an hour rather than ten minutes
 
-Your Stage 0 was a 100, so the standard you hold yourself to is not in question. This is a page of writing that has not happened yet, and it is due before the model.
+Stage 1.3 asks you to explain why your prediction and your model disagreed. That reflection is only worth writing if there was a real prediction to disagree with, and it has to have been committed before the model existed — your commit history is the proof, which is why a hypothesis written after the Solver run is worth nothing even when it is correct.
+
+Your Stage 0 was a 100. The standard you hold yourself to is not in question here. This is a page of writing that has not happened yet, and Stage 1.2 is due 6 September, which means the brief needs to close this week.
 
 ---
 
