@@ -4,7 +4,7 @@ engagement: perfect-competition
 capability: marginal-analysis
 date: 2026-08-24
 status: committed          # committed | superseded
-hypothesis: "TBD"
+hypothesis: "18 tomato beds, 16 carrot beds, 30 mesclun beds"
 ---
 
 # Perfect Competition — engagement brief
