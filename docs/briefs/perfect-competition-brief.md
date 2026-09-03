@@ -16,6 +16,7 @@ Based on the provided data (64 beds, a 36 week season in a perfect competition m
 I am assuming the farm will use all 64 beds and cannot go over any of the limits. Since we are taking the market price, I will assume that the revenue from each bed stays the same. Adding one bed makes all the beds of that crop more labor intensive. No starting labor info or labor cost has been provided so I cannot tell how costly the compounding rates would be. If I had more time, I would like to know the starting labor info and costs. This may help to determine if enough labor is available and how labor costs would affect the best crop mix.
 
 ## Hypothesis
-
+I expect 18 tomato beds, 16 carrot beds, and 30 mesclun beds because mesclun earns more than carrots and has the lowest labor-compounding rates. With tomatoes earning the most per bed, I expect the revenue to justify the 18 beds but not the full 20 due to the compounding labor rate of 10%.
 
 ## How I would know I was wrong
+My reasoning would be wrong if the model recommends 17 or less tomato beds meaning that I have underestimated the effect of its labor compounding rate.
