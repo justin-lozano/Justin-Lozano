@@ -1,49 +1,36 @@
-<!-- PR TARGET: https://github.com/justin-lozano/Justin-Lozano | Stage 1.1 (2.5 pts) -->
+<!-- PR TARGET: https://github.com/justin-lozano/Justin-Lozano | Stage 1.1 -->
 # Stage 1.1 review — engagement brief
 
 **Brief:** [`docs/briefs/perfect-competition-brief.md`](https://github.com/justin-lozano/Justin-Lozano/blob/main/docs/briefs/perfect-competition-brief.md)
 
-> Re-graded 2026-09-02 against your 1 September revision. Last time the file was the untouched template and there was nothing to score. There is real work in it now — the problem section is genuinely yours and it is largely right — but the hypothesis and the falsification section are still blank, and those two carry 45 of the 100 points.
+> Re-graded 2026-09-04 against your revision of 3 September. This is the first time this brief has been scored — the two previous passes were holds, because the file was the unfilled template and then had two empty sections. Both are filled now, you corrected the factual error I flagged, and you used the data you had said was missing.
 
-| Criterion | Earned | Notes |
-|---|---|---|
-| Problem restated in your own voice | 26 / 30 | This is real and it is yours. You catch the thing that makes the case a decision rather than a calculation: the caps sum to 70 against 64 beds, so "I have 6 beds more than what I'm given if I planted the max for each vegetable" and something has to give. And you frame the question correctly — "not which crop would earn the most, rather, how many beds should be planted for each respective crop before any extra revenue concentrated in a crop would no longer be worth it." That is the marginal question stated in your own words, which is what this criterion is for. Four points off because you do not say what it costs to decide it badly beyond profit being eaten into — the season is planted once and there is no mid-season correction, which is the real answer. |
-| Hypothesis names a specific mix | 0 / 25 | The section heading is there and nothing is under it. The frontmatter still reads hypothesis: "TBD". This is the criterion the stage exists for — three real bed counts, committed before you model anything — and it is the largest single block of points on the page. |
-| Economic mechanism | 8 / 25 | Partly present, inside the problem section rather than its own. You have the compounding rates right and you understand what they do: tomatoes at 10% per bed against 2.5% for carrots and 1.25% for mesclun, and the recognition that the answer is a crossover point rather than a ranking. Nothing is quantified, and one factual claim is wrong — see below. |
-| Falsifiability and process | 4 / 20 | The section heading is there and nothing is under it. Four points for having the file at the canonical path, committed before any modeling, with a clean history. |
-| **Final** | **38 / 100** | entered |
+| Criterion | Where it stands |
+|---|---|
+| Problem restated in your own voice | Stronger again, and it was already the best part. You catch the thing that makes this a decision rather than a calculation — the caps total 70 against 64 beds — and you frame the question the way the case wants it framed: not which crop earns most, but how many beds of each before the extra revenue stops being worth it. The new closing line is the one that was missing: "This decision needs to be made before any planting begins with little to no opportunity to correct a bad allocation during the season." What is still open is that the section opens with a data list before it gets to your reading of it. |
+| Hypothesis names a specific mix | 18 tomato, 16 carrot, 30 mesclun. Three real integers, every one inside its cap, and the frontmatter now carries the same numbers instead of TBD. This criterion was the largest single gap on the page and it is closed. |
+| Economic mechanism | Present and correct as far as it goes: mesclun earns more than carrots and compounds most slowly, so it runs to its cap; tomatoes earn most per bed but compound fastest, so they stop short. Two things hold it back. The 18 is asserted rather than derived — you say the revenue justifies 18 but not 20 without saying what makes 18 the line. And 16 carrot beds is the number that is never explained at all: carrots have the lowest labor, the lowest fertilizer and a shallow rate, so the obvious question is why they stop four short of a cap that nothing appears to be pushing them away from. |
+| Falsifiability and process | Three conditions where there were none, and the first two do something better than most in this cohort — they split being wrong in two directions. Seventeen or fewer tomato beds means you underestimated the compounding; nineteen or twenty means you overestimated it. Naming both tails separately is the right instinct. What is still open is that they are thresholds without a band, so 17 and 3 are the same verdict, and the mesclun condition has no number in it at all. |
 
-> Raw total 38 of 100. There is no floor available here: the floor applies to a committed brief that restates the problem in your own words and names a specific mix, and the mix is the half that is missing. Two paragraphs would change that.
+### You fixed the thing that was actually blocking you
 
-### The factual correction, and it is the thing blocking you
+Your previous version said no labor information had been provided and that you could not tell how costly the compounding would be. It was in the same table you took the prices from, and once that was pointed out the rest of the brief came together in a single sitting.
 
-You write: "No starting labor info or labor cost has been provided so I cannot tell how costly the compounding rates would be. If I had more time, I would like to know the starting labor info and costs."
+The revised assumptions section now uses all four numbers — 2.5, 0.833 and 1.25 hours per bed-week, and the farmer and temporary-worker costs — and states plainly that you are taking them as given. That is the right way to handle an assumption: name it, take it, and say what you would test with more time.
 
-Both are in the case, in the same table you took the prices from. Labor hours per week per bed: tomatoes 2.50, carrots 0.833, mesclun 1.25. And the labor cost: the farmer is paid $50,000 for the season and spends 720 hours in the field, and up to four temporary workers are available at $25,000 each for 1,440 hours each — which works out to about $34.72 an hour for her and $17.36 for them.
+### The carrot number is the loose thread
 
-That is not a small correction, because it is the only thing standing between you and the rest of the brief. You already worked out that the answer is a crossover between rising labor cost and fixed revenue. With those four numbers you can actually locate it.
+Sixteen carrot beds is the one figure in your mix with no argument behind it, and it is the one most likely to be wrong.
 
-### The arithmetic, so you can start from something concrete
+Carrots are the cheapest crop you have on every dimension that matters: 0.833 hours per bed-week against tomatoes' 2.50, $440 of fertilizer against $880, and a 2.5% compounding rate against 10%. One carrot bed is about 30 hours for the season. Twenty carrot beds are 20 x 30 x 1.025^20, roughly 983 hours — barely more than ten tomato beds need, for twice the acreage.
 
-One bed of tomatoes takes 2.50 hours a week for 36 weeks, so 90 hours a season. The compounding works on the whole crop, not just the new bed: q beds of a crop need q × hours-per-bed-week × 36 × (1 + rate)^q hours in total. So ten tomato beds are not 900 hours — they are 900 × 1.1^10, about 2,334.
+So the question to answer in one sentence: what stops carrots at 16? If nothing does, the number should be 20 and your total goes to 68, which exceeds the 64 beds you have — and then something else has to give, and working out which is the actual decision this case is about.
 
-Carrots: one bed is 0.833 × 36, about 30 hours. Mesclun: 1.25 × 36, 45 hours. Both compound far more slowly.
+### Stage 1.2 is due 6 september and you have not started it
 
-Now the question you already framed correctly has a shape. Tomatoes earn $8,800 a bed against labor that roughly doubles every seven or eight beds. Carrots earn $2,094 against labor that barely moves. Where does the tomato bed stop being worth planting?
+capabilities/marginal-analysis/ is scaffolded with no spec.md. That stage is the specification, the Excel model built from it, and an audit written after the build — and the specification has to be committed before the workbook exists, because the commit order is part of what is graded.
 
-### What to write, and it is two paragraphs
-
-- Under Hypothesis: three numbers. How many beds of tomatoes, carrots, mesclun. Then one paragraph saying why those numbers and not others, using the rates. You are not graded on being right. A hedged prediction that would survive any outcome is the only kind that is worthless.
-
-- Under How I would know I was wrong: two or three sentences, each naming a result the model could actually produce and the claim of yours it would break. "If the model shows a different mix" is true of every hypothesis ever written and tests nothing. "If the model plants more than 14 tomato beds, I underestimated how fast the 10% penalty compounds" is a real test.
-
-- Then update the frontmatter hypothesis line so it matches the body rather than reading TBD.
-
-### Why this is worth an hour rather than ten minutes
-
-Stage 1.3 asks you to explain why your prediction and your model disagreed. That reflection is only worth writing if there was a real prediction to disagree with, and it has to have been committed before the model existed — your commit history is the proof, which is why a hypothesis written after the Solver run is worth nothing even when it is correct.
-
-Your Stage 0 was a 100. The standard you hold yourself to is not in question here. This is a page of writing that has not happened yet, and Stage 1.2 is due 6 September, which means the brief needs to close this week.
+Your Stage 0 was a 100 and this brief moved a long way in four days, so the capacity is not in question. Two days is tight but not impossible for a specification plus a first build. Start with the inputs table and the labor function — LABOR_HRS(q) = q x hours-per-bed-week x 36 x (1 + rate)^q — and the rest follows from those.
 
 ---
 
@@ -53,9 +40,11 @@ Treat this PR the way an analyst treats feedback from a senior reviewer — a re
 
 1. **Read it yourself first.** Form your own view before you change anything. Disagreeing *with a documented reason* is a legitimate, senior response.
 2. **Stress-test it with an LLM.** Paste this review and your brief into your assistant and ask it to (a) explain anything you are unsure of, and (b) argue the *other side* — where might the reviewer be wrong, and what would you give up by making each change.
-3. **Then write the changes yourself.** For a brief, this matters more than usual: a hypothesis you did not generate cannot be honestly compared against your model in Stage 3, and that comparison is the entire point of writing the brief first.
+3. **Then write the changes yourself.** For a brief this matters more than usual: a hypothesis you did not generate cannot be honestly compared against your model in Stage 3, and that comparison is the entire point of writing the brief first.
 4. **Close the loop.** Reply in this thread with what you changed and what you pushed back on, then commit and push.
 
-*One standing rule for this stage: do not revise your hypothesis to match what your model later tells you. If the model contradicts the brief, that is a finding, not an error — Stage 3 asks you to explain the gap, and a brief quietly edited to be right afterwards has nothing left to explain.*
+*One standing rule: do not revise your hypothesis to match what your model later tells you. If the model contradicts the brief, that is a finding, not an error.*
+
+*Your score and the per-criterion breakdown are in your Lamaku comment, not here — this repository is public.*
 
 — Adam
