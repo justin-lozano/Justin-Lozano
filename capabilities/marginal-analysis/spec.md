@@ -292,3 +292,13 @@ TOM_BEDS, CAR_BEDS, MES_BEDS = integers
 - **Audit Evidence:** The model must report whether each validation and constraint check passed or failed, along with the final mix and profit from both Solver starting points.
 
 ## Audit Findings
+
+- **One-bed labor check:** I checked one tomato bed by calculating 1 × 2.5 × 36 × 1.10. It matched the expected 99 hours within the 0.01-hour tolerance, so the check passed. This would have caught a missing exponent or an incorrect labor formula. I made no changes because the formula gave the expected result.
+
+- **Farm Profit Lab cross-check:** I compared the sixth-bed tomato marginal cost in my workbook with the Farm Profit Lab. Both rounded to $4,906. This helped confirm that my tomato marginal-cost formula was consistent with an independent source, so I made no changes.
+
+- **Two Solver starting points:** I ran Solver from `0/0/0` and `20/0/0`. Both runs produced the same final mix of 10 tomato, 20 carrot, and 30 mesclun beds, with a season profit of $42,762. This agreement is evidence against path dependence because changing the starting point did not change the result. I made no changes because both runs agreed.
+
+- **Tomato marginal-cost dip:** I reviewed the tomato marginal-cost schedule and found that marginal cost decreased from approximately $7,661 at bed 5 to approximately $4,906 at bed 6. I recorded it as `FLAGGED`. I did not explain the economic cause because that analysis belongs in a later stage of the case, not this validation stage.
+
+- **Constraints and formula errors:** I reviewed the checks and found that all seven constraints passed and there were no reported formula errors. These checks helped confirm that the final result stayed within the model's limits and that the formulas were working. I made no changes because all the checks passed.
