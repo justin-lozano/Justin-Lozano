@@ -40,19 +40,26 @@ The purpose of this analysis is to determine how many beds I should allocate to 
 | `MES_DIM_PCT` | 1.25% | Percent per additional bed | Case scenario, crop table |
 
 ## Structure
+
+The workbook must contain five worksheets named exactly `Inputs`, `Cost Structure`, `Marginal-Cost Schedules`, `Optimization`, and `Checks`.
+
 - **Inputs:** The Inputs worksheet should contain all the given constants and assumptions, including bed revenue, maximum bed limits, and labor-increase rates for tomatoes, carrots, and mesclun, as well as the season length, fixed costs, total beds, and labor availability and rates. These values should be provided rather than calculated by formulas so they can be changed without editing the model's logic. Each input must clearly show its name, value, unit, and source.
 
 - **Cost Structure:** The Cost Structure worksheet should calculate and display total labor and farm costs, including total labor hours, farmer hours, temporary-labor hours, labor cost, the blended labor rate, fertilizer cost, variable costs, fixed costs, and total costs.
 
-- **Marginal-Cost Schedules:** The Marginal-Cost Schedules worksheet should show each crop's bed quantity, total labor hours required, total cost, marginal cost of the next bed, and crop price for comparison with marginal cost. Each schedule should cover every whole-bed quantity from zero through the crop's cap: 20 beds for tomatoes, 20 for carrots, and 30 for mesclun.
+- **Marginal-Cost Schedules:** The Marginal-Cost Schedules worksheet should show each crop's bed quantity, total labor hours required, standalone variable cost, marginal cost of the next bed, and crop price for comparison with marginal cost. Each schedule should cover every whole-bed quantity from zero through the crop's cap: 20 beds for tomatoes, 20 for carrots, and 30 for mesclun. Fixed costs are excluded because they do not change as bed quantity changes.
 
 - **Optimization:** The Optimization worksheet should contain the three decision cells for tomato, carrot, and mesclun bed counts, the total-profit objective, the farm and crop constraints, and the Solver method and optimized result.
 
 - **Checks:** The Checks worksheet should display the hand-calculation check for one tomato bed, the expected optimized mix and season profit, whether all constraints are satisfied, whether the workbook contains formula errors, and a clear pass/fail result for each check.
 
+- The completed workbook must be saved as `capabilities/marginal-analysis/model.xlsx`.
+
 ## Calculation logic
 
-The decision variables are `TOM_BEDS`, `CAR_BEDS`, and `MES_BEDS`. Each must be a nonnegative whole number.
+The decision variables are `TOM_BEDS`, `CAR_BEDS`, and `MES_BEDS`. Each must be a nonnegative whole number. 
+
+Function notation such as `TOM_LABOR_HRS(q)` is conceptual named-range notation. The workbook may implement this logic using ordinary Excel formulas and named ranges; custom `LAMBDA` functions are not required.
 
 ### Crop labor requirements
 
@@ -156,6 +163,8 @@ TOTAL_REVENUE - TOTAL_COST
 
 Each standalone schedule evaluates one crop at a time while applying the same farmer-first labor rule.
 
+Each schedule must display standalone variable cost rather than total cost. Fixed costs are excluded because they do not change as bed quantity changes.
+
 #### Tomatoes
 
 ```text
@@ -215,6 +224,7 @@ MES_STANDALONE_VARIABLE_COST(q)
 
 Marginal cost at `q = 0` must be blank for all three crops because no previous quantity exists.
 
+For each crop, report the largest bed quantity `q` for which `MC(q) ≤ PRICE`, before the marginal cost of the next bed exceeds price.
 ### Optimization
 
 ```text
@@ -244,6 +254,8 @@ TOM_BEDS, CAR_BEDS, MES_BEDS = integers
 
 - **Boundaries:** Bed counts are nonnegative integers, inclusive of their caps. The blended rate returns zero at zero labor hours instead of a division error. Marginal cost at `q = 0` is blank because no prior quantity exists. Each marginal-cost schedule stops at its crop's own bed cap.
 
+- - **Calculated names:** Create Excel named ranges for all scalar decision, cost, labor, revenue, profit, and constraint results referenced by name in this specification. Individual marginal-cost schedule rows do not require separate named ranges.
+
 - **Fixed costs:** The $20,000 seasonal fixed cost is included once, in total cost and profit. It is excluded from crop allocations and standalone marginal-cost calculations because it does not change with bed count.
 
 - **Temporary-worker equivalents:** `TEMP_WORKERS_NEEDED` equals temporary hours divided by 1,440 and may be fractional. Cost and capacity checks use actual hours, not a rounded-up worker count.
@@ -252,20 +264,21 @@ TOM_BEDS, CAR_BEDS, MES_BEDS = integers
 
 1. **One-bed labor check:** At `q = 1`, `TOM_LABOR_HRS` equals 99 hours (`1 × 2.5 × 36 × 1.10`). The check passes if the calculated value is within 0.01 hour of 99.
 
-2. **Optimized result:** Solver's optimal mix must equal 10 tomato, 20 carrot, and 30 mesclun beds (60 total). Season profit must equal approximately $42,762, allowing only display-rounding differences.
+2. **Optimized result:** Solver's optimal mix must equal 10 tomato, 20 carrot, and 30 mesclun beds (60 total). The optimized-profit check passes when the full-precision season profit rounds to $42,762 to the nearest dollar.
 
 3. **Standalone P ≈ MC crossings:** Price must approximately equal marginal cost at 10 tomato, 10 carrot, and 6 mesclun beds on the standalone schedules.
 
 4. **Two Solver starting points:** Run GRG Nonlinear with integer decisions from `0/0/0` and `20/0/0`. Record both final mixes and profits. Agreement is evidence against path dependence; disagreement requires reporting both, identifying the higher-profit result, and logging the disagreement as an audit finding.
+   The `Checks` worksheet must contain a two-row audit table recording the starting point, final tomato/carrot/mesclun mix, total beds, total profit, and Solver status for each run. These results may be manually recorded after each Solver run.
 
 5. **Farm Profit Lab cross-check:** Compare `TOM_MC(6)` (~$4,906) with the Farm Profit Lab's sixth-bed tomato marginal cost. Record both values and their difference. The check passes if they agree within $1 after rounding.
 
-6. **Formulas and errors:** Every calculated cell must use a formula rather than a pasted value and must reference named inputs or other calculated cells. The workbook must contain no `#REF!`, `#DIV/0!`, `#NAME?`, `#VALUE!`, or `#N/A` errors.
-
+6. **Formulas and errors:** Every calculated cell must use a formula rather than a pasted value and must reference named inputs or other calculated cells. The workbook must contain no `#REF!`, `#DIV/0!`, `#NAME?`, `#VALUE!`, or `#N/A` errors. The formula-only requirement applies to calculated outputs. Input values, Solver decision cells, and manually recorded Solver-run audit evidence are permitted values and are exempt. Review all designated calculated cells in the `Cost Structure`, `Marginal-Cost Schedules`, `Optimization`, and `Checks` worksheets. Each must contain a formula, and the entire workbook must contain no Excel error values. The `Inputs` worksheet is excluded from the formula requirement but remains included in the error review.
+ 
 7. **Constraints:** The Checks worksheet must show green PASS or red FAIL results for the total-bed limit, each crop's bed cap, temporary-worker capacity, nonnegative beds, and integer beds. Every constraint must pass for the optimized solution.
 
-8. **Tomato marginal-cost dip:** Flag the decrease in tomato marginal cost from approximately $7,661 at bed 5 to approximately $4,906 at bed 6. Record where it occurs without explaining the economic cause at this stage.
-
+8. **Tomato marginal-cost dip:** Flag the decrease in tomato marginal cost from approximately $7,661 at bed 5 to approximately $4,906 at bed 6. Record where it occurs without explaining the economic cause at this stage. The `Checks` worksheet must use a formula to compare `TOM_MC(6)` with `TOM_MC(5)`, display `FLAGGED` when `TOM_MC(6) < TOM_MC(5)`, and record both marginal-cost values.
+   
 ## Outputs
 
 - **Decision results:** The model must report optimized tomato beds (`TOM_BEDS`), carrot beds (`CAR_BEDS`), mesclun beds (`MES_BEDS`), total beds planted (`TOTAL_BEDS_USED`), and total season profit (`TOTAL_PROFIT`).
