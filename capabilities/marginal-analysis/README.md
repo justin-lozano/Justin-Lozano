@@ -6,4 +6,4 @@ effort against its incremental benefit to find the optimal point of action.
 
 ## Engagements
 
-_None yet — will be listed here as they're completed._
+- **Exercised in:** Perfect Competition — farm bed allocation and profit optimization ([specification](spec.md), [workbook](model.xlsx)).
