@@ -40,7 +40,15 @@ The purpose of this analysis is to determine how many beds I should allocate to 
 | `MES_DIM_PCT` | 1.25% | Percent per additional bed | Case scenario, crop table |
 
 ## Structure
-Each sheet or region, and what it is for.
+- **Inputs:** The Inputs worksheet should contain all the given constants and assumptions, including bed revenue, maximum bed limits, and labor-increase rates for tomatoes, carrots, and mesclun, as well as the season length, fixed costs, total beds, and labor availability and rates. These values should be provided rather than calculated by formulas so they can be changed without editing the model's logic. Each input must clearly show its name, value, unit, and source.
+
+- **Cost Structure:** The Cost Structure worksheet should calculate and display total labor and farm costs, including total labor hours, farmer hours, temporary-labor hours, labor cost, the blended labor rate, fertilizer cost, variable costs, fixed costs, and total costs.
+
+- **Marginal-Cost Schedules:** The Marginal-Cost Schedules worksheet should show each crop's bed quantity, total labor hours required, total cost, marginal cost of the next bed, and crop price for comparison with marginal cost. Each schedule should cover every whole-bed quantity from zero through the crop's cap: 20 beds for tomatoes, 20 for carrots, and 30 for mesclun.
+
+- **Optimization:** The Optimization worksheet should contain the three decision cells for tomato, carrot, and mesclun bed counts, the total-profit objective, the farm and crop constraints, and the Solver method and optimized result.
+
+- **Checks:** The Checks worksheet should display the hand-calculation check for one tomato bed, the expected optimized mix and season profit, whether all constraints are satisfied, whether the workbook contains formula errors, and a clear pass/fail result for each check.
 
 ## Calculation logic
 In named-range notation, never cell addresses:
