@@ -53,7 +53,7 @@ The workbook must contain five worksheets named exactly `Inputs`, `Cost Structur
 
 - **Checks:** The Checks worksheet should display the hand-calculation check for one tomato bed, the expected optimized mix and season profit, whether all constraints are satisfied, whether the workbook contains formula errors, and a clear pass/fail result for each check.
 
-- The completed workbook must be saved as `capabilities/marginal-analysis/model.xlsx`.
+The completed workbook must be saved as `capabilities/marginal-analysis/model.xlsx`.
 
 ## Calculation logic
 
@@ -254,7 +254,7 @@ TOM_BEDS, CAR_BEDS, MES_BEDS = integers
 
 - **Boundaries:** Bed counts are nonnegative integers, inclusive of their caps. The blended rate returns zero at zero labor hours instead of a division error. Marginal cost at `q = 0` is blank because no prior quantity exists. Each marginal-cost schedule stops at its crop's own bed cap.
 
-- - **Calculated names:** Create Excel named ranges for all scalar decision, cost, labor, revenue, profit, and constraint results referenced by name in this specification. Individual marginal-cost schedule rows do not require separate named ranges.
+- **Calculated names:** Create Excel named ranges for all scalar decision, cost, labor, revenue, profit, and constraint results referenced by name in this specification. Individual marginal-cost schedule rows do not require separate named ranges.
 
 - **Fixed costs:** The $20,000 seasonal fixed cost is included once, in total cost and profit. It is excluded from crop allocations and standalone marginal-cost calculations because it does not change with bed count.
 
