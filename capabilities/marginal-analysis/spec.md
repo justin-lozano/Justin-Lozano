@@ -10,7 +10,7 @@ built_with: "pending"
 # Marginal Analysis — model specification
 
 ## Purpose
-The purpose of this analysis is to determine how many beds I should allocate to tomatoes, carrots, and mesclun in order to maximize profit. It should also test whether the optimized allocation supports or contradicts the original hypothesis of 18/16/30 once marginal revenue, marginal cost, and the farm's bed constraints are accounted for.
+The purpose of this analysis is to determine how many beds I should allocate to tomatoes, carrots, and mesclun in order to maximize profit. It should also test whether the optimized allocation supports or contradicts the original hypothesis of 18/16/30 once marginal revenue, marginal cost, and the farm's bed and labor constraints are accounted for.
 
 ## Inputs — the named contract
 | Name | Value | Unit | Source |
@@ -237,18 +237,43 @@ TOM_BEDS, CAR_BEDS, MES_BEDS = integers
 ```
 
 ## Conventions
-The rules that are not visible in the formulas: costing order, allocation basis,
-rounding, what happens at the boundaries. State all of them. A convention you
-leave out is a convention the builder invents.
+
+- **Labor order and allocation:** The farmer's hours are consumed first (up to 720), with temporary labor covering only the remainder. Temporary labor is capped at four workers × 1,440 hours each. Since neither worker type is assigned to a specific crop, crop labor costs use the farm-wide blended rate.
+
+- **Rounding:** Formulas retain full precision; rounding is for display only. Currency and marginal costs display to the nearest dollar; hourly rates, labor hours, and temporary-worker equivalents to two decimals; bed counts as whole numbers.
+
+- **Boundaries:** Bed counts are nonnegative integers, inclusive of their caps. The blended rate returns zero at zero labor hours instead of a division error. Marginal cost at `q = 0` is blank because no prior quantity exists. Each marginal-cost schedule stops at its crop's own bed cap.
+
+- **Fixed costs:** The $20,000 seasonal fixed cost is included once, in total cost and profit. It is excluded from crop allocations and standalone marginal-cost calculations because it does not change with bed count.
+
+- **Temporary-worker equivalents:** `TEMP_WORKERS_NEEDED` equals temporary hours divided by 1,440 and may be fractional. Cost and capacity checks use actual hours, not a rounded-up worker count.
 
 ## Validation rules
-The conditions the finished artifact must satisfy — check figures as acceptance
-criteria, hand calculations, and structural rules ("every calculated cell
-contains a formula", "no error cells").
+
+1. **One-bed labor check:** At `q = 1`, `TOM_LABOR_HRS` equals 99 hours (`1 × 2.5 × 36 × 1.10`). The check passes if the calculated value is within 0.01 hour of 99.
+
+2. **Optimized result:** Solver's optimal mix must equal 10 tomato, 20 carrot, and 30 mesclun beds (60 total). Season profit must equal approximately $42,762, allowing only display-rounding differences.
+
+3. **Standalone P ≈ MC crossings:** Price must approximately equal marginal cost at 10 tomato, 10 carrot, and 6 mesclun beds on the standalone schedules.
+
+4. **Two Solver starting points:** Run GRG Nonlinear with integer decisions from `0/0/0` and `20/0/0`. Record both final mixes and profits. Agreement is evidence against path dependence; disagreement requires reporting both, identifying the higher-profit result, and logging the disagreement as an audit finding.
+
+5. **Farm Profit Lab cross-check:** Compare `TOM_MC(6)` (~$4,906) with the Farm Profit Lab's sixth-bed tomato marginal cost. Record both values and their difference. The check passes if they agree within $1 after rounding.
+
+6. **Formulas and errors:** Every calculated cell must use a formula rather than a pasted value and must reference named inputs or other calculated cells. The workbook must contain no `#REF!`, `#DIV/0!`, `#NAME?`, `#VALUE!`, or `#N/A` errors.
+
+7. **Constraints:** The Checks worksheet must show green PASS or red FAIL results for the total-bed limit, each crop's bed cap, temporary-worker capacity, nonnegative beds, and integer beds. Every constraint must pass for the optimized solution.
+
+8. **Tomato marginal-cost dip:** Flag the decrease in tomato marginal cost from approximately $7,661 at bed 5 to approximately $4,906 at bed 6. Record where it occurs without explaining the economic cause at this stage.
 
 ## Outputs
-Each result the model reports, by name.
 
-## Audit findings
-Added AFTER the build. For each check: what you checked, what you found, what
-you did about it.
+- **Decision results:** The model must report optimized tomato beds (`TOM_BEDS`), carrot beds (`CAR_BEDS`), mesclun beds (`MES_BEDS`), total beds planted (`TOTAL_BEDS_USED`), and total season profit (`TOTAL_PROFIT`).
+
+- **Farm results:** The model must report total revenue (`TOTAL_REVENUE`), total labor hours (`TOTAL_LABOR_HRS`), farmer hours used (`FARMER_HOURS_USED`), temporary hours (`TEMP_HOURS_USED`), temporary-worker equivalents (`TEMP_WORKERS_NEEDED`), blended labor rate (`BLENDED_LABOR_RATE`), total labor cost (`TOTAL_LABOR_COST`), fertilizer cost (`TOTAL_FERT_COST`), variable cost (`TOTAL_VARIABLE_COST`), fixed costs (`FIXED_COSTS`), and total cost (`TOTAL_COST`).
+
+- **Marginal Analysis:** For each crop, the model must report its standalone marginal-cost schedule, constant market price, and approximate quantity where price equals marginal cost. It must also identify the tomato marginal-cost dip.
+
+- **Audit Evidence:** The model must report whether each validation and constraint check passed or failed, along with the final mix and profit from both Solver starting points.
+
+## Audit Findings
