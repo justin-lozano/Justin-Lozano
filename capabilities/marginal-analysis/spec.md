@@ -3,8 +3,8 @@ type: spec
 capability: marginal-analysis
 engagement: perfect-competition
 date: 2026-09-05
-status: draft            # draft | built | audited
-built_with: "pending"
+status: audited
+built_with: "Codex (Chat-only route)"
 ---
 
 # Marginal Analysis — model specification
