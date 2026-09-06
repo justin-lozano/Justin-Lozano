@@ -51,12 +51,190 @@ The purpose of this analysis is to determine how many beds I should allocate to 
 - **Checks:** The Checks worksheet should display the hand-calculation check for one tomato bed, the expected optimized mix and season profit, whether all constraints are satisfied, whether the workbook contains formula errors, and a clear pass/fail result for each check.
 
 ## Calculation logic
-In named-range notation, never cell addresses:
 
-  LABOR_HRS(q) = q x HRS_PER_BED x WEEKS x (1 + DIM_PCT)^q
+The decision variables are `TOM_BEDS`, `CAR_BEDS`, and `MES_BEDS`. Each must be a nonnegative whole number.
 
-"Column D times column E" is not a specification — it describes a spreadsheet
-that does not exist yet.
+### Crop labor requirements
+
+For `q` beds of each crop:
+
+```text
+TOM_LABOR_HRS(q) =
+q × TOM_HRS × SEASON_WEEKS × (1 + TOM_DIM_PCT)^q
+
+CAR_LABOR_HRS(q) =
+q × CAR_HRS × SEASON_WEEKS × (1 + CAR_DIM_PCT)^q
+
+MES_LABOR_HRS(q) =
+q × MES_HRS × SEASON_WEEKS × (1 + MES_DIM_PCT)^q
+```
+
+These formulas calculate total seasonal labor hours and capture how each additional bed increases the labor requirements across all beds already planted for that crop.
+
+### Farm labor allocation and cost
+
+```text
+TOTAL_LABOR_HRS =
+TOM_LABOR_HRS(TOM_BEDS)
++ CAR_LABOR_HRS(CAR_BEDS)
++ MES_LABOR_HRS(MES_BEDS)
+
+FARMER_HOURS_USED =
+MIN(TOTAL_LABOR_HRS, FARMER_HOURS_AVAILABLE)
+
+TEMP_HOURS_USED =
+MAX(TOTAL_LABOR_HRS - FARMER_HOURS_AVAILABLE, 0)
+
+MAX_TEMP_HOURS =
+MAX_TEMP_WORKERS × TEMP_HOURS_PER_WORKER
+
+TEMP_WORKERS_NEEDED =
+TEMP_HOURS_USED / TEMP_HOURS_PER_WORKER
+```
+
+The farmer's hours must be used first and are capped at 720. Temporary labor supplies the remaining hours, subject to the four-worker capacity of 5,760 hours.
+
+```text
+FARMER_LABOR_COST =
+FARMER_HOURS_USED × FARMER_HOURLY_RATE
+
+TEMP_LABOR_COST =
+TEMP_HOURS_USED × TEMP_HOURLY_RATE
+
+TOTAL_LABOR_COST =
+FARMER_LABOR_COST + TEMP_LABOR_COST
+
+BLENDED_LABOR_RATE =
+IF(TOTAL_LABOR_HRS = 0, 0,
+TOTAL_LABOR_COST / TOTAL_LABOR_HRS)
+```
+
+The farm-wide blended labor rate must be used to allocate labor cost to each crop because the farmer and temporary workers are not dedicated to individual crops.
+
+```text
+TOM_LABOR_COST =
+TOM_LABOR_HRS(TOM_BEDS) × BLENDED_LABOR_RATE
+
+CAR_LABOR_COST =
+CAR_LABOR_HRS(CAR_BEDS) × BLENDED_LABOR_RATE
+
+MES_LABOR_COST =
+MES_LABOR_HRS(MES_BEDS) × BLENDED_LABOR_RATE
+```
+
+### Revenue, fertilizer, and profit
+
+```text
+TOM_REVENUE =
+TOM_BEDS × TOM_PRICE
+
+CAR_REVENUE =
+CAR_BEDS × CAR_PRICE
+
+MES_REVENUE =
+MES_BEDS × MES_PRICE
+
+TOTAL_REVENUE =
+TOM_REVENUE + CAR_REVENUE + MES_REVENUE
+
+TOTAL_FERT_COST =
+(TOM_BEDS × TOM_FERT_COST)
++ (CAR_BEDS × CAR_FERT_COST)
++ (MES_BEDS × MES_FERT_COST)
+
+TOTAL_VARIABLE_COST =
+TOTAL_LABOR_COST + TOTAL_FERT_COST
+
+TOTAL_COST =
+TOTAL_VARIABLE_COST + FIXED_COSTS
+
+TOTAL_PROFIT =
+TOTAL_REVENUE - TOTAL_COST
+```
+
+### Standalone marginal-cost schedules
+
+Each standalone schedule evaluates one crop at a time while applying the same farmer-first labor rule.
+
+#### Tomatoes
+
+```text
+TOM_STANDALONE_FARMER_HOURS(q) =
+MIN(TOM_LABOR_HRS(q), FARMER_HOURS_AVAILABLE)
+
+TOM_STANDALONE_TEMP_HOURS(q) =
+MAX(TOM_LABOR_HRS(q) - FARMER_HOURS_AVAILABLE, 0)
+
+TOM_STANDALONE_VARIABLE_COST(q) =
+(TOM_STANDALONE_FARMER_HOURS(q) × FARMER_HOURLY_RATE)
++ (TOM_STANDALONE_TEMP_HOURS(q) × TEMP_HOURLY_RATE)
++ (q × TOM_FERT_COST)
+
+TOM_MC(q) =
+TOM_STANDALONE_VARIABLE_COST(q)
+- TOM_STANDALONE_VARIABLE_COST(q - 1)
+```
+
+#### Carrots
+
+```text
+CAR_STANDALONE_FARMER_HOURS(q) =
+MIN(CAR_LABOR_HRS(q), FARMER_HOURS_AVAILABLE)
+
+CAR_STANDALONE_TEMP_HOURS(q) =
+MAX(CAR_LABOR_HRS(q) - FARMER_HOURS_AVAILABLE, 0)
+
+CAR_STANDALONE_VARIABLE_COST(q) =
+(CAR_STANDALONE_FARMER_HOURS(q) × FARMER_HOURLY_RATE)
++ (CAR_STANDALONE_TEMP_HOURS(q) × TEMP_HOURLY_RATE)
++ (q × CAR_FERT_COST)
+
+CAR_MC(q) =
+CAR_STANDALONE_VARIABLE_COST(q)
+- CAR_STANDALONE_VARIABLE_COST(q - 1)
+```
+
+#### Mesclun
+
+```text
+MES_STANDALONE_FARMER_HOURS(q) =
+MIN(MES_LABOR_HRS(q), FARMER_HOURS_AVAILABLE)
+
+MES_STANDALONE_TEMP_HOURS(q) =
+MAX(MES_LABOR_HRS(q) - FARMER_HOURS_AVAILABLE, 0)
+
+MES_STANDALONE_VARIABLE_COST(q) =
+(MES_STANDALONE_FARMER_HOURS(q) × FARMER_HOURLY_RATE)
++ (MES_STANDALONE_TEMP_HOURS(q) × TEMP_HOURLY_RATE)
++ (q × MES_FERT_COST)
+
+MES_MC(q) =
+MES_STANDALONE_VARIABLE_COST(q)
+- MES_STANDALONE_VARIABLE_COST(q - 1)
+```
+
+Marginal cost at `q = 0` must be blank for all three crops because no previous quantity exists.
+
+### Optimization
+
+```text
+TOTAL_BEDS_USED =
+TOM_BEDS + CAR_BEDS + MES_BEDS
+```
+
+Solver must maximize `TOTAL_PROFIT` by changing `TOM_BEDS`, `CAR_BEDS`, and `MES_BEDS` using GRG Nonlinear with integer decisions.
+
+The decision variables must satisfy:
+
+```text
+TOTAL_BEDS_USED <= TOTAL_BEDS_AVAILABLE
+TOM_BEDS <= TOM_BED_CAP
+CAR_BEDS <= CAR_BED_CAP
+MES_BEDS <= MES_BED_CAP
+TEMP_WORKERS_NEEDED <= MAX_TEMP_WORKERS
+TOM_BEDS, CAR_BEDS, MES_BEDS >= 0
+TOM_BEDS, CAR_BEDS, MES_BEDS = integers
+```
 
 ## Conventions
 The rules that are not visible in the formulas: costing order, allocation basis,
