@@ -19,10 +19,10 @@ The purpose of this analysis is to determine how many beds I should allocate to 
 | `FIXED_COSTS` | 20000 |USD per season | Case Scenario, farm table |
 | `TOTAL_BEDS_AVAILABLE` | 64 | Beds | Case Scenario, farm table |
 | `FARMER_HOURS_AVAILABLE` | 720 | Field hours per season | Case Scenario, farm table |
-| `FARMER_HOURLY_RATE` | 34.72 | USD per field hour | Case Scenario, farm table |
+| `FARMER_HOURLY_RATE` | 34.7222222222 | USD per field hour | Case scenario and Farm Profit Lab |
 | `MAX_TEMP_WORKERS` | 4 | Workers per season | Case Scenario, farm table |
 | `TEMP_HOURS_PER_WORKER` | 1440 | Field hours per worker season | Case Scenario, farm table |
-| `TEMP_HOURLY_RATE` | 17.36 | USD per field hour | Case Scenario, farm table |
+| `TEMP_HOURLY_RATE` | 17.3611111111 | USD per field hour | Case scenario and Farm Profit Lab |
 | `TOM_BED_CAP` | 20 | Beds | Case Scenario, crop table |
 | `TOM_PRICE` | 8800 | USD per bed | Case scenario, crop table |
 | `TOM_HRS`   | 2.5  | Hours per week per bed | Case scenario, crop table |
@@ -30,7 +30,7 @@ The purpose of this analysis is to determine how many beds I should allocate to 
 | `TOM_DIM_PCT` | 10% | Percent per additional bed | Case scenario, crop table |
 | `CAR_BED_CAP` | 20 | Beds | Case scenario, crop table |
 | `CAR_PRICE` | 2094 | USD per bed | Case scenario, crop table |
-| `CAR_HRS` | 0.833 | Hours per week per bed | Case scenario, crop table |
+| `CAR_HRS` | 0.8333333333 | Hours per week per bed | Case scenario and Farm Profit Lab |
 | `CAR_FERT_COST` | 440 | USD per bed | Case scenario, crop table |
 | `CAR_DIM_PCT` | 2.5% | Percent per additional bed | Case scenario, crop table |
 | `MES_BED_CAP` | 30 | Beds | Case scenario, crop table |
@@ -251,6 +251,8 @@ TOM_BEDS, CAR_BEDS, MES_BEDS = integers
 - **Labor order and allocation:** The farmer's hours are consumed first (up to 720), with temporary labor covering only the remainder. Temporary labor is capped at four workers × 1,440 hours each. Since neither worker type is assigned to a specific crop, crop labor costs use the farm-wide blended rate.
 
 - **Rounding:** Formulas retain full precision; rounding is for display only. Currency and marginal costs display to the nearest dollar; hourly rates, labor hours, and temporary-worker equivalents to two decimals; bed counts as whole numbers.
+
+- **Source precision:** Calculations use the unrounded course-model constants: `CAR_HRS = 2.5 / 3`, `FARMER_HOURLY_RATE = 50000 / (40 × 36)`, and `TEMP_HOURLY_RATE = 25000 / (40 × 36)`. Their workbook input values are provided at sufficient decimal precision and may display as `0.833`, `$34.72`, and `$17.36`.
 
 - **Boundaries:** Bed counts are nonnegative integers, inclusive of their caps. The blended rate returns zero at zero labor hours instead of a division error. Marginal cost at `q = 0` is blank because no prior quantity exists. Each marginal-cost schedule stops at its crop's own bed cap.
 
