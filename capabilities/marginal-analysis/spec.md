@@ -224,7 +224,8 @@ MES_STANDALONE_VARIABLE_COST(q)
 
 Marginal cost at `q = 0` must be blank for all three crops because no previous quantity exists.
 
-For each crop, report the largest bed quantity `q` for which `MC(q) ≤ PRICE`, before the marginal cost of the next bed exceeds price.
+For each crop, report the first price-marginal-cost crossing as the smallest bed quantity `q` for which `MC(q+1)` exceeds the crop's price.
+
 ### Optimization
 
 ```text
@@ -275,7 +276,7 @@ TOM_BEDS, CAR_BEDS, MES_BEDS = integers
 
 5. **Farm Profit Lab cross-check:** Compare `TOM_MC(6)` (~$4,906) with the Farm Profit Lab's sixth-bed tomato marginal cost. Record both values and their difference. The check passes if they agree within $1 after rounding.
 
-6. **Formulas and errors:** Every calculated cell must use a formula rather than a pasted value and must reference named inputs or other calculated cells. The workbook must contain no `#REF!`, `#DIV/0!`, `#NAME?`, `#VALUE!`, or `#N/A` errors. The formula-only requirement applies to calculated outputs. Input values, Solver decision cells, and manually recorded Solver-run audit evidence are permitted values and are exempt. Review all designated calculated cells in the `Cost Structure`, `Marginal-Cost Schedules`, `Optimization`, and `Checks` worksheets. Each must contain a formula, and the entire workbook must contain no Excel error values. The `Inputs` worksheet is excluded from the formula requirement but remains included in the error review.
+6. **Formulas and errors:** Every calculated cell must use a formula rather than a pasted value and must reference named inputs or other calculated cells. `Checks!B22` must count all error values within the designated calculated ranges: `Cost Structure!B4:B18`, `Marginal-Cost Schedules!B5:W35`, and `Optimization!B10:B28`. The check passes only when the resulting error count equals zero.
  
 7. **Constraints:** The Checks worksheet must show green PASS or red FAIL results for the total-bed limit, each crop's bed cap, temporary-worker capacity, nonnegative beds, and integer beds. Every constraint must pass for the optimized solution.
 
@@ -301,4 +302,4 @@ TOM_BEDS, CAR_BEDS, MES_BEDS = integers
 
 - **Tomato marginal-cost dip:** I reviewed the tomato marginal-cost schedule and found that marginal cost decreased from approximately $7,661 at bed 5 to approximately $4,906 at bed 6. I recorded it as `FLAGGED`. I did not explain the economic cause because that analysis belongs in a later stage of the case, not this validation stage.
 
-- **Constraints and formula errors:** I reviewed the checks and found that all seven constraints passed and there were no reported formula errors. These checks helped confirm that the final result stayed within the model's limits and that the formulas were working. I made no changes because all the checks passed.
+- **Constraints and formula errors:** I reviewed the checks and found that all seven constraints passed. However, the formula-error check used `=0`, so it reported PASS without examining the workbook. I updated the specification to name the exact calculated ranges and replaced the placeholder with a formula that counts errors across those ranges. I tested the check by temporarily creating an error; it changed to 1 and FAIL, then returned to 0 and PASS after I restored the correct formula.
