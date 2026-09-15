@@ -12,6 +12,10 @@ The 10th tomato bed's marginal revenue will exceed the marginal cost by $551 the
 
 The constraints that are binding are the carrot bed caps (20/20) and the mesclun bed caps (30/30). The two slack constraints are the temporary-worker equivalents (3.16/4) and total beds available (60/64). A constraint is binding when the model reaches its limit while a slack constraint has unused capacity.
 
+Carrots (bed 20: MC $1,689 vs. price $2,094) and mesclun (bed 30: MC $2,420 vs. price $2,700) both reach their bed caps while marginal cost remains below price, confirming that the caps are what stop further planting of these two crops and not marginal cost rising to meet price.
+
+(`Marginal-Cost Schedules!N25:O25`, `Marginal-Cost Schedules!V35:W35`)
+
 (`Optimization!B5:B7`, `Optimization!B10`, `Optimization!B19`, `Inputs!B6`, `Inputs!B9`)
 
 The current total farm profit is $42,762 at a cap of 20 carrot beds. The profit increases by $352 as it goes up to $43,114 by relaxing the bed cap at 21. The current total farm profit is $42,762 at a cap of 30 mesclun beds. The profit increases by $246 as it goes up to $43,008 by relaxing the mesclun bed cap at 31. The farmer should consider relaxing the carrot-growing capacity first because the estimated value of relaxing the carrot cap is $106 more than the estimated value of relaxing the mesclun cap.
@@ -28,8 +32,10 @@ When the farm moves to five tomato beds, total labor hours reach 724.73. This us
 
 The carrots and mesclun lose money as each carries the entire fixed cost alone. Carrots contribute $3,511 toward fixed costs while mesclun contributes $8,078 toward fixed costs. However, 10 beds of tomatoes earn about $6,173 alone. The farm pays the $20,000 fixed cost only once and not once for each crop. Since carrots and mesclun have positive contributions after variable costs, growing them improves total farm profit even though neither covers the entire fixed cost alone.
 
+The average variable cost for carrots is $1,918.45 which is below the $2,094.00 price while the average variable cost of mesclun is $2,430.73 which is below the $2,700.00 price. The prices each exceed the average variable costs so revenue covers variable costs and contributes toward unavoidable fixed costs. This supports the continuing production in the short run even when the standalone total profit is negative.
+
 (`Marginal-Cost Schedules!E15:G15`, `Marginal-Cost Schedules!M25:O25`, `Marginal-Cost Schedules!U35:W35`, `Inputs!B5`)
 
 ## Comparison with My Original Hypothesis
 
-The model did not support my hypothesis. I overestimated tomato crops by eight beds, underestimated carrot crops by four beds, and was correct with my mesclun value. The tomatoes stopped at 10 beds because the 11th bed's $9,391 marginal cost exceeded its $8,800 price. Carrots rose to 20 because their marginal cost remains below price once they reach the cap. Mesclun remains at 30 because I had already placed it at its binding cap.
+The model did not support my hypothesis. I overestimated tomato crops by eight beds, underestimated carrot crops by four beds, and was correct with my mesclun value. The tomatoes stopped at 10 beds because the 11th bed's $9,391 marginal cost exceeded its $8,800 price. Carrots rose to 20 because their marginal cost remains below price once they reach the cap. Mesclun remains at 30 because that figure is its binding cap. This is also the same number I had predicted, however, the model arrives there through the constraint rather than through marginal cost catching up to price.
