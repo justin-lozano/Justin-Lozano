@@ -6,21 +6,23 @@ The 10th tomato bed's marginal revenue will exceed the marginal cost by $551 the
 
 (`Marginal-Cost Schedules!F15:G16`)
 
-![Tomato marginal cost compared with market price](https://raw.githubusercontent.com/justin-lozano/Justin-Lozano/main/analysis/figures/tomato-mc-price.png)
+![Tomato marginal cost compared with market price](figures/tomato-mc-price.png)
 
 ## Binding and Slack Constraints
 
-The constraints that are binding are the carrot bed caps (20/20) and the mesclun bed caps (30/30). The two slack constraints are the temporary-worker equivalents (3.16/4) and total beds available (60/64). A constraint is binding when the model reaches its limit while a slack constraint has unused capacity.
+The binding constraints are the carrot cap (20/20 beds) and mesclun cap (30/30 beds). Three capacity constraints are slack: the tomato cap (10/20 beds), temporary-worker equivalents (approximately 3.16/4), and total beds available (60/64). A binding constraint has no unused capacity, while a slack constraint does. Tomatoes stop at 10 beds because the 11th bed's marginal cost exceeds its price, not because the tomato cap prevents further planting.
 
-Carrots (bed 20: MC $1,689 vs. price $2,094) and mesclun (bed 30: MC $2,420 vs. price $2,700) both reach their bed caps while marginal cost remains below price, confirming that the caps are what stop further planting of these two crops and not marginal cost rising to meet price.
+(`Optimization!B5:B7`, `Optimization!B10`, `Optimization!B19`, `Inputs!B6`, `Inputs!B9`, `Marginal-Cost Schedules!F15:G16`)
+
+Carrots (bed 20: MC approximately $1,689 vs. price $2,094) and mesclun (bed 30: MC approximately $2,420 vs. price $2,700) both reach their bed caps while marginal cost remains below price. The cap-relaxation tests confirm that allowing another bed of either crop increases farm profit.
 
 (`Marginal-Cost Schedules!N25:O25`, `Marginal-Cost Schedules!V35:W35`)
 
-(`Optimization!B5:B7`, `Optimization!B10`, `Optimization!B19`, `Inputs!B6`, `Inputs!B9`)
+Starting from the original baseline each time, relaxing the carrot cap from 20 to 21 beds increases total farm profit by $352.49, while relaxing the mesclun cap from 30 to 31 beds increases it by $246.47. These are the estimated discrete shadow values of the respective caps: the profit gained from permitting one additional bed. Carrot capacity provides $106.02 more benefit, so it should be prioritized when additional expansion costs are comparable.
 
-The current total farm profit is $42,762 at a cap of 20 carrot beds. The profit increases by $352 as it goes up to $43,114 by relaxing the bed cap at 21. The current total farm profit is $42,762 at a cap of 30 mesclun beds. The profit increases by $246 as it goes up to $43,008 by relaxing the mesclun bed cap at 31. The farmer should consider relaxing the carrot-growing capacity first because the estimated value of relaxing the carrot cap is $106 more than the estimated value of relaxing the mesclun cap.
+![Profit increase from relaxing each crop cap by one bed](figures/crop-cap-profit-increase.png)
 
-![Profit increase from relaxing each crop cap by one bed](https://raw.githubusercontent.com/justin-lozano/Justin-Lozano/main/analysis/figures/crop-cap-profit-increase.png)
+Figure labels are rounded to the nearest dollar; the text reports the gains to the nearest cent.
 
 ## Why Tomato Marginal Cost Dips
 
