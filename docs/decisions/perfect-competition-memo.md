@@ -1,7 +1,7 @@
 # Perfect Competition Decision Memo
 
-My recommendation to the farmer would be to plant a total of 60 beds that includes 10 tomato, 20 carrot, and 30 mesclun beds that would yield $42,762 in season profit.
+My recommendation to the farmer would be to plant a total of 60 beds that includes 10 tomato, 20 carrot, and 30 mesclun beds that would yield approximately $42,762 in season profit.
 
-The current total farm profit is $42,762 at a cap of 20 carrot beds. The profit increases by $352 as it goes up to $43,114 by relaxing the bed cap at 21. The current total farm profit is $42,762 at a cap of 30 mesclun beds. The profit increases by $246 as it goes up to $43,008 by relaxing the mesclun bed cap at 31. The farmer should consider relaxing the carrot-growing capacity first because the estimated value of relaxing the carrot cap is $106 more than the estimated value of relaxing the mesclun cap.
+The farmer should prioritize expanding carrot capacity before mesclun capacity when additional expansion costs are comparable. Relaxing the carrot cap from 20 to 21 beds increases modeled season profit by $352.49, compared with $246.47 for relaxing the mesclun cap from 30 to 31 beds. Carrot expansion therefore provides a $106.02 greater benefit.
 
-If the cost of adding one more carrot bed is less than $352.00, expansion is profitable and should be done. If the cost exceeds $352.00, the extra capacity costs more than its benefit and therefore should not be done. The $352.00 is the gain from relaxing carrot capacity by one bed meaning the expansion cost will be an additional cost that is not yet included in the model.
+Expanding carrot capacity is worthwhile if the additional expansion cost not already included in the model is below $352.49; at that amount, it breaks even. The priority would switch to mesclun if carrot expansion costs exceeded mesclun expansion costs by more than $106.02, provided mesclun expansion still produced a positive net benefit.
