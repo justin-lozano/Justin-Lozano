@@ -32,7 +32,7 @@ When the farm moves to five tomato beds, total labor hours reach 724.73. This us
 
 ## Standalone Losses and Fixed Costs
 
-The carrots and mesclun lose money as each carries the entire fixed cost alone. Carrots contribute $3,511 toward fixed costs while mesclun contributes $8,078 toward fixed costs. However, 10 beds of tomatoes earn about $6,173 alone. The farm pays the $20,000 fixed cost only once and not once for each crop. Since carrots and mesclun have positive contributions after variable costs, growing them improves total farm profit even though neither covers the entire fixed cost alone.
+The carrots and mesclun lose money when each caries the entire fixed cost alone. Carrots contribute about $3,511 toward fixed costs, resulting in a standalone loss of about $16,489 after the $20,000 fixed cost. Mesclun contributes about $8,078 toward fixed costs, resulting in a standalone loss of about $11,922 after the fixed cost. However, 10 beds of tomatoes earn about $6,173 alone. The farm pays the $20,000 fixed cost only once and not once for each crop. Since carrots and mesclun have positive contributions after variable costs, growing them improves total farm profit even though neither covers the entire fixed cost alone.
 
 The average variable cost for carrots is $1,918.45 which is below the $2,094.00 price while the average variable cost of mesclun is $2,430.73 which is below the $2,700.00 price. The prices each exceed the average variable costs so revenue covers variable costs and contributes toward unavoidable fixed costs. This supports the continuing production in the short run even when the standalone total profit is negative.
 
