@@ -15,4 +15,4 @@ Original facility statements and the vendor estimate are retained outside this r
 
 A preliminary bill decomposition was developed with AI assistance. Transcribed values, formulas, and charge classifications remain subject to verification against the original statements. The external comparison must account for actual service dates.
 
-The supporting table’s publication format remains to be resolved so that it provides evidence for the paper while complying with the repository’s confidentiality rules.
+The full bill decomposition and supporting vendor figures will be provided directly to Adam through a private submission, outside GitHub. This repository will document the sources, calculation method, and verification status without publishing the underlying facility figures.
