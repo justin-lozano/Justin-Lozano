@@ -15,7 +15,11 @@ Blended electricity cost per kWh equals the total electricity bill divided by bi
 
 ## Verification status
 
-A preliminary bill decomposition was developed with AI assistance. Transcribed values, formulas, and charge classifications remain subject to verification against the original statements. The external comparison must account for actual service dates.
+A preliminary bill decomposition was developed with AI assistance. I checked the April–July statement dates, billing days, billed kWh, billed demand, current charges, and individual charge amounts against the original statements. Codex confirmed that each statement’s line items sum to its current charges.
+
+I also checked the workbook’s Energy Cost Recovery and total blended-rate formulas for April–July. Day-weighted comparisons using HECO’s published Schedule P ECR factors closely reproduce the billed ECR rates across all four service periods. A small residual in the May comparison remains unexplained.
+
+Charge classifications and the treatment of charges when estimating LED savings remain provisional. Agreement with published ECR factors does not establish how much of the increase was caused by crude oil prices.
 
 ## Data sharing
 
