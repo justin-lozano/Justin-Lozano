@@ -1,6 +1,6 @@
 # Prompt Log
 
-| Date | Goal | Exact Prompt | Tool (LLM/Sheet/Code) | Output Link/Location | Notes |
+| Date | Goal | Prompt (verbatim or summarized) | Tool (LLM/Sheet/Code) | Output Link/Location | Notes |
 |------|------|--------------|------------------------|----------------------|-------|
 | 2026-08-18 | Improve GitHub biography | "Here is my current biography: [pasted original bio]. Please rewrite it to be more concise and professional for my GitHub profile. Preserve my actual education, experience, skills, and career interests. Do not invent accomplishments." | ChatGPT | `BIO.md` | Prompt reconstructed from memory. I retained my factual background and accepted improvements to clarity, organization, and tone. I revised language that did not sound like me. |
 | 2026-08-18 | Format résumé for GitHub | "Here is my résumé: [pasted résumé]. Convert it into clean Markdown for GitHub. Organize the sections clearly, improve readability, and preserve all job titles, dates, education, and other factual information." | ChatGPT | `RESUME.md` | Prompt reconstructed from memory. I retained the factual résumé content and accepted Markdown and organizational improvements. |
