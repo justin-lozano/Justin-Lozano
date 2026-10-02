@@ -21,3 +21,7 @@ The following checks are being documented after preliminary analysis, rather tha
 - I will compare the facility’s Energy Cost Recovery per kWh with HECO’s published adjustments, accounting for the actual service dates and any adjustments that change within a billing period. A mismatch would require investigation before drawing a conclusion about the transmission channel.
 
 The recommendation will evaluate whether the company President should approve LED conversion using estimated project cost and avoided electricity charges while maintaining clinical availability.
+
+## Proposed investment decision criteria
+
+The earlier 4.5-year payback target was provisional and based on preliminary calculations. This evaluation proposes replacing it with a five-year analysis of savings, net of replacement and other incremental costs. Product lives and warranties informed the five-year period. They help set the evaluation window, but they do not establish what financial return the facility should require. To test that uncertainty, I will discount net savings at assumed annual returns of 5%, 8%, and 10%. These rates are analytical assumptions, not facility policy. Under the proposed criteria, the investment qualifies if its discounted net savings cover its net cost, subject to the President accepting these criteria. Fixture counts and wattages are not yet available, so I will use assumed savings scenarios based on the vendor estimate until those figures are verified.
